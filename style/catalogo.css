@@ -1,0 +1,869 @@
+/* Usadas */
+
+    body{
+        margin: 0;
+        border: 0;
+        padding: 0;
+        background-color: rgb(20, 20, 20);
+        font-family: 'Anton', sans-serif;
+    }
+
+
+    /* div que guarda os botões de seleção dos filmes */
+        .navigation-genero {
+            display: flex;
+            justify-content: space-between;
+            max-width: 425px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .video iframe{
+            margin: 15px    ;
+            width: 960px; 
+            height: 515px;
+        }
+
+        .center{
+            align-items: center;
+        }
+
+
+    /* Marca o botão .meat-button de acordo com a aba selecionada. */
+        #genero-acao:checked ~ .navigation-genero > #button-acao,
+        #genero-terror:checked ~ .navigation-genero > #button-terror {
+            border: solid 3px red;
+            transition-delay: 0.3s;
+            box-shadow: 3px 3px 10px red;
+            font-weight: bold;
+        }
+
+    
+    /* Botão terror selecionado = exibe aba terror */
+        #genero-terror:checked ~ #report-filmes {
+            left: -100%;
+        }
+
+        #genero-terror:checked ~ #report-filmes > .filmes-terror-botao{
+            display: grid;
+        }
+
+
+    /* Efeito grayscale + desfocar*/
+        .navigation-genero:active ~ #report-filmes > .filmes-acao-botao,
+        .navigation-genero:active ~ #report-filmes > .filmes-terror-botao{
+            filter: grayscale(50%) blur(13px);
+        }
+
+
+    /* divs que guardam os cards com as sinopse, tanto ação quanto terror*/
+        .filmes-acao-botao,
+        .filmes-terror-botao{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            max-width: 1500px;
+            margin: 0px auto;
+            padding-top: 30px;
+            transition: 0.6s;
+        }
+    
+
+     /* Botão ação selecionado = exibe aba ação */
+        #genero-acao:checked ~ #report-filmes {
+            left: 0;
+        }
+
+        #genero-acao:checked ~ #report-filmes > .filmes-acao-botao {
+            display: grid;
+        }
+
+
+    /* label que são os botões dos filmes */
+        .meat-button {
+            display: block;
+            min-width: 185px;
+            height: fit-content;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: solid 3px rgba(255, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 5px;
+            color: whitesmoke;
+            background-color: rgb(0, 0, 0);
+            transition: 0.8s;
+        }
+
+        .meat-button:hover {
+            transform: scale(1.1);
+            border: solid 3px red;
+            cursor: pointer;
+        }
+
+ 
+    /* Usado para dar caracteristicas aos paragrafos que acompanham
+    as imagens dos filmes*/
+        .card-filmes > .card-tag {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            font-family: fantasy, sans-serif;
+            font-size: 26px;
+            color: white;
+            text-shadow: 2px 2px 1px black;
+            background-color: rgba(255, 0, 0, 0.5);
+            transition: 0.6s;
+        }
+
+        .card-filmes:hover .card-tag {
+            font-size: 30px;
+            background-color: red;
+        }
+
+
+    /* div que guarda o conteudo dos cards*/
+        .card-filmes {
+            position: relative;
+            display: flex;
+            margin: 30px 20px;
+            width: 280px;
+            height: 420px;
+            overflow: hidden;
+            text-align: center;
+            transition: 0.6s;
+            background-color: whitesmoke;
+            cursor: pointer;
+        }
+
+        .card-filmes:hover{
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+            border: 2px solid #fff;
+        }
+
+
+
+    /* Id usado para agregar propriedades a toda área que guarda o conteúdo da sinopse.*/
+        #content-filmes {
+            background-color: #222;
+            min-height: 125vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+
+    /* usado para fazer as imagens dos filmes ocuparem todo o espaço da div sem perder qualidade */
+        #content-filmes img {
+            min-width: 100%;
+            max-width: 100%;
+            display: block;
+            transition: 0.45s;
+        }
+
+
+    /* Id usado para dividir em duas telas, uma para o conteúdo da aba ação e outra tela para aba terror.*/
+        #report-filmes {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, 100%);
+            transition: 1s;
+        }
+
+
+    /* Usado para ocultar os inputs*/
+        .chooses-input {
+            display: none;
+        }
+
+
+    /* Usado para armazenas o conteudo dos filmes*/
+    /* Classes com prefixo/sufixo recipe referem-se a aba que exibe a sinopse quando solicitado*/
+        .recipes {
+            position: fixed;
+            top: 50%;
+            left: 150%;
+            transform: translate(-50%, -50%);
+            font-family: cursive, sans-serif;
+            min-height: 100%;
+            /* max-height: 100vh; */
+            width: 100%;
+            background-color: black;
+            transition: 0.6s;
+            opacity: 0;
+        }
+
+
+    /* Imagem da aba da sinopse*/
+        .recipe-image {
+            position: relative;
+            display: flex;
+        }
+        
+    /* Paragrafo "retornar a página anterior" */
+        .recipe-image > p {
+            position: absolute;
+            right: 0;
+            background-color: rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 5px;
+            height: fit-content;
+            width: fit-content;
+            font-weight: bold;
+            transition: 0.6s;
+            z-index: 2;
+        }
+    
+        .recipe-image:hover {
+            transition: 0.6s;
+            cursor: pointer;
+            transform: scale(0.98);
+            filter: grayscale(35%);
+        }
+    
+        .recipe-image:hover > p {
+            background-color: red;
+            color: rgb(139, 65, 65);
+            transform: scale(1.1);
+            box-shadow: 2px 2px 20px red;
+        }
+
+        
+    /* Usado para que ao chamar a div recipes,
+    mostre apenas o conteudo da respectiva sinopse requisitada.
+    Também formata a aba que efetivamente exibe a sinopse. */
+        .choose-recipe {
+            display: grid;
+            min-width: 100vh;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr 1.2fr;
+            background-color: black;
+            max-height: 100vh;
+        }
+
+
+    /* Informações sobre o filme (ano, duração, etc.) */
+        .recipe-informacoes {
+            font-family: cursive, sans-serif;
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            grid-column: 1;
+            grid-row-start: 2;
+            grid-row-end: 4;
+            background-color: red;
+            border: solid 2.5px black;
+            border-radius: 20px;
+        }
+    
+        .recipe-informacoes > img {
+            width: 80%;
+        }
+    
+        /* Dá as caracteristicas ao texto "informações" */
+        .recipe-informacoes > p:nth-child(2) {
+            font-size: 32px;
+            background-image: radial-gradient(#fff, gray);
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            align-self: center;
+            text-align: center;
+            grid-column-start: 3;
+            grid-column-end: 8;
+        }
+    
+        .recipe-informacoes::before > p:nth-child(2) {
+            content: "";
+            width: 1000px;
+            height: 10px;
+            background-color: white;
+        }
+    
+        /* Alinha as imagens das pipocas na aba informações*/
+        .recipe-informacoes > img:nth-child(3) {
+            grid-column: 9;
+        }
+    
+        .recipe-informacoes-list {
+            padding: 15px;
+            margin-right: -5px;
+            max-height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            color: #fff;
+            grid-column-start: 1;
+            grid-column-end: 10;
+            grid-row-start: 1;
+            grid-row-end: 10;
+        }
+    
+        .recipe-informacoes-list > table {
+            width: 90%;
+            margin: auto;
+        }
+    
+        .recipe-informacoes-list > table th {
+            text-align: left;
+            font-weight: normal;
+        }
+    
+        .recipe-informacoes-list > table th > b {
+            font-size: 25px;
+            border-bottom: solid 2px black;
+            text-align: left;
+        }
+
+
+    /* Organiza o fundo da aba que descreve a sinopse. */
+        .recipe-briefing-background {
+            grid-row-start: 1;
+            grid-row-end: 3;
+            grid-column-start: 2;
+            grid-column-end: 4;
+            background-color: white;
+            border: solid 2.5px black;
+            background-image: url(../image/chefe.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position-x: center;
+            background-position-y: center;
+        }
+
+    /* Resumo da receita */
+        .recipe-briefing {
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+        }
+
+        .recipe-briefing > h3 {
+            text-align: center;
+            font-size: 26px;
+            color: #fff;
+        }
+
+        .recipe-briefing > h3::after {
+            content: "";
+            height: 6px;
+            width: 500px;
+            border-radius: 30px;
+            /* border-bottom: solid 5px #a00; */
+            display: block;
+            background-image: radial-gradient(red, #a00);
+            margin: 0 auto;
+        }
+
+    /* Paragrafo que contém a sinopse. */
+        .recipe-orientation {
+            margin: 20px auto;
+            font-size: 21px;
+            max-width: 80%;
+            color: #fff;
+        }
+
+
+    /* =====Animações da sinopse===== */
+        #recipe-1,
+        #recipe-2,
+        #recipe-3,
+        #recipe-4,
+        #recipe-5,
+        #recipe-6,
+        #recipe-7,
+        #recipe-8,
+        #recipe-9, 
+        #recipe-10, 
+        #recipe-11, 
+        #recipe-12, 
+        #recipe-13,
+        #recipe-14,
+        #recipe-15,
+        #recipe-16,
+        #recipe-17,
+        #recipe-18,
+        #recipe-19, 
+        #recipe-20 {
+            display: none;
+        }
+
+
+    /* Chama a aba .recipe ao solicitar de qualquer uma das sinopse */
+        #recipe1:checked ~ #report-filmes > .recipes,
+        #recipe2:checked ~ #report-filmes > .recipes,
+        #recipe3:checked ~ #report-filmes > .recipes,
+        #recipe4:checked ~ #report-filmes > .recipes,
+        #recipe5:checked ~ #report-filmes > .recipes,
+        #recipe6:checked ~ #report-filmes > .recipes,
+        #recipe7:checked ~ #report-filmes > .recipes,
+        #recipe8:checked ~ #report-filmes > .recipes,
+        #recipe9:checked ~ #report-filmes > .recipes,
+        #recipe10:checked ~ #report-filmes > .recipes,
+        #recipe11:checked ~ #report-filmes > .recipes,
+        #recipe12:checked ~ #report-filmes > .recipes,
+        #recipe13:checked ~ #report-filmes > .recipes,
+        #recipe14:checked ~ #report-filmes > .recipes,
+        #recipe15:checked ~ #report-filmes > .recipes,
+        #recipe16:checked ~ #report-filmes > .recipes,
+        #recipe17:checked ~ #report-filmes > .recipes,
+        #recipe18:checked ~ #report-filmes > .recipes,
+        #recipe19:checked ~ #report-filmes > .recipes,
+        #recipe20:checked ~ #report-filmes > .recipes{
+            left: 50%;
+            opacity: 1;
+        }
+
+    /* Torna visível apenas a sinopse selecionada na aba .recipe requisitada. */
+        #recipe1:checked ~ #report-filmes > .recipes > #recipe-1 {
+            display: grid;
+        }
+
+        #recipe2:checked ~ #report-filmes > .recipes > #recipe-2 {
+            display: grid;
+        }
+
+        #recipe3:checked ~ #report-filmes > .recipes > #recipe-3 {
+            display: grid;
+        }
+
+        #recipe4:checked ~ #report-filmes > .recipes > #recipe-4 {
+            display: grid;
+        }
+
+        #recipe5:checked ~ #report-filmes > .recipes > #recipe-5 {
+            display: grid;
+        }
+
+        #recipe6:checked ~ #report-filmes > .recipes > #recipe-6 {
+            display: grid;
+        }
+
+        #recipe7:checked ~ #report-filmes > .recipes > #recipe-7 {
+            display: grid;
+        }
+
+        #recipe8:checked ~ #report-filmes > .recipes > #recipe-8 {
+            display: grid;
+        }
+
+        #recipe9:checked ~ #report-filmes > .recipes > #recipe-9 {
+            display: grid;
+        }
+
+        #recipe10:checked ~ #report-filmes > .recipes > #recipe-10 {
+            display: grid;
+        }
+
+        #recipe11:checked ~ #report-filmes > .recipes > #recipe-11 {
+            display: grid;
+        }
+
+        #recipe12:checked ~ #report-filmes > .recipes > #recipe-12 {
+            display: grid;
+        }
+
+        #recipe13:checked ~ #report-filmes > .recipes > #recipe-13 {
+            display: grid;
+        }
+
+        #recipe14:checked ~ #report-filmes > .recipes > #recipe-14 {
+            display: grid;
+        }
+
+        #recipe15:checked ~ #report-filmes > .recipes > #recipe-15 {
+            display: grid;
+        }
+
+        #recipe16:checked ~ #report-filmes > .recipes > #recipe-16 {
+            display: grid;
+        }
+
+        #recipe17:checked ~ #report-filmes > .recipes > #recipe-17 {
+            display: grid;
+        }
+
+        #recipe18:checked ~ #report-filmes > .recipes > #recipe-18 {
+            display: grid;
+        }
+
+        #recipe19:checked ~ #report-filmes > .recipes > #recipe-19 {
+            display: grid;
+        }
+
+        #recipe20:checked ~ #report-filmes > .recipes > #recipe-20 {
+            display: grid;
+        }
+
+        .container-info{
+            max-width: 1130px;
+            margin: 0 auto;
+        }
+
+        .section-info{
+            padding: 4rem 0;
+            background: #000;
+        }
+
+        .section-info h2{
+            font-size: 50px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .section-info p{
+            font-size: 26px;
+            color: #fff;
+        }
+
+        .grid-info{
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            align-items: center;
+        }
+
+        .img-tv{
+            position: relative;
+        }
+
+        .img-tv img{
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-tv{
+            position: absolute;
+            top: 80px;
+            left: 70px;
+            width: 490px;
+        }
+
+        .video-tv2{
+            position: absolute;
+            top: 40px;
+            left: 110px;
+            width: 400px;
+        }
+
+        .pix{
+            height: 300px;
+            width: 300px;
+        }
+
+
+        
+        /* Seção Footer */
+            
+        .container-footer{
+            max-width: 1170px;
+            margin: auto;
+        }
+
+        .footer{
+            background-color: #000000;
+            padding: 70px 0;
+        }
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .footer-col{
+            width: 25%;
+            padding: 0 15px;
+        }
+
+
+        .footer-col p:not(:last-child){
+            margin-bottom: 10px;
+        }
+
+        .footer-col p a{
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col p a:hover{
+            color: red;
+            padding-left: 8px;
+        }
+
+        .logo{
+            margin: 50px;
+            text-decoration: none;
+            color: #d60000;
+            font-size: 45px;
+            transform: rotateZ(-362deg);
+            display: inline-block;
+            -webkit-filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+            filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+        }
+
+        .logo:hover{
+            transform: rotateZ(362deg);
+        }
+
+
+
+        @media(max-width: 767px){
+            .footer-col{
+                width: 50%;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media(max-width: 576px){
+            .footer-col{
+                width: 100%;
+            }
+        }
+    /* Fim seção footer */
+
+
+
+
+
+
+
+/* -------------------------------------RESPOSIVIDADE------------------------------------- */
+
+
+        /* --- */
+        @media only screen and (max-width: 1250px) {
+            #content-filmes {
+            min-height: fit-content;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1500px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+
+            .container-info{
+                max-width: 300px;
+                margin: 0 auto;
+            }
+    
+            .section-info h2{
+                font-size: 30px;
+                margin-bottom: 10px;
+            }
+    
+            .section-info p{
+                font-size: 16px;
+            }
+
+            .section-info{
+                padding: 4rem 0;
+                background: #000;
+            }
+    
+    
+            .grid-info{
+                display: flow-root;
+                grid-template-columns: 1.1fr 1fr;
+                align-items: center;
+            }
+    
+            .img-tv{
+                position: relative;
+            }
+    
+            .img-tv img{
+                position: relative;
+                z-index: 1;
+            }
+    
+            .video-tv{
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                width: 270px;
+            }
+
+            .video-tv2{
+                position: absolute;
+                top: 20px;
+                left: 55px;
+                width: 180px;
+            }
+
+            .img-tv img{
+                width: 300px;
+            }
+    
+        }
+
+
+        @media (min-width: 650px) and (max-width: 800px) {
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1500px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+        }
+
+        @media (min-width: 801px) and (max-width: 999px) {
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1500px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+        }
+
+
+        @media (min-width: 1000px) and (max-width: 1300px) {
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1500px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+
+            .card-filmes {
+                position: relative;
+                display: flex;
+                margin: 30px 10px;
+                width: 300px;
+                height: 440px;
+                overflow: hidden;
+                text-align: center;
+                transition: 0.6s;
+                background-color: whitesmoke;
+                cursor: pointer;
+            }
+
+            .card-filmes:hover{
+                -webkit-transform: scale(1.2);
+                transform: scale(1.1);
+                border: 2px solid #fff;
+            }
+        }
+
+
+
+        @media (min-width: 1300px) and (max-width: 1450px) {
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1600px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+
+            .card-filmes {
+                position: relative;
+                display: flex;
+                margin: 30px 10px;
+                width: 240px;
+                height: 380px;
+                overflow: hidden;
+                text-align: center;
+                transition: 0.6s;
+                background-color: whitesmoke;
+                cursor: pointer;
+            }
+
+            .card-filmes:hover{
+                -webkit-transform: scale(1.2);
+                transform: scale(1.1);
+                border: 2px solid #fff;
+            }
+        }
+
+
+        @media (min-width: 1500px) and (max-width: 1650px) {
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1600px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+
+            .card-filmes {
+                position: relative;
+                display: flex;
+                margin: 30px 10px;
+                width: 270px;
+                height: 410px;
+                overflow: hidden;
+                text-align: center;
+                transition: 0.6s;
+                background-color: whitesmoke;
+                cursor: pointer;
+            }
+
+            .card-filmes:hover{
+                -webkit-transform: scale(1.2);
+                transform: scale(1.1);
+                border: 2px solid #fff;
+            }
+        }
+
+
+        @media (min-width: 1650px){
+            .filmes-acao-botao,
+            .filmes-terror-botao{
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                max-width: 1600px;
+                margin: 0px auto;
+                padding-top: 30px;
+                transition: 0.6s;
+            }
+
+            .card-filmes {
+                position: relative;
+                display: flex;
+                margin: 30px 10px;
+                width: 300px;
+                height: 440px;
+                overflow: hidden;
+                text-align: center;
+                transition: 0.6s;
+                background-color: whitesmoke;
+                cursor: pointer;
+            }
+
+            .card-filmes:hover{
+                -webkit-transform: scale(1.2);
+                transform: scale(1.1);
+                border: 2px solid #fff;
+            }
+        }

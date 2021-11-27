@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MyFlixzin</title>
+        <link rel="stylesheet" href="style/index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+
+        <div class="center">
+            <h1>MyFlixzin</h1>
+        </div>
+
+        <div class="center">
+            <a href="catalogo.html">
+                <img class="login usuario margin10" src="images/JohnWick.png" alt="Conta 1"> 
+            </a>
+        </div>
+        <div class="center">
+            <img class="inter" src="images/inter.png" alt="Informações" onclick="music()">
+        </div>
+
+    </body>
+
+    <script>
+        function music(){
+            var audio= new Audio();
+            audio.src= "myflixzin.MP3";
+            audio.play();
+        }
+    </script>
+
+</html>

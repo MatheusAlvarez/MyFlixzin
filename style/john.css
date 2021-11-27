@@ -1,0 +1,259 @@
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    } 
+
+    .center{
+        text-align: center;
+        align-items: center;
+    }
+
+    .block{
+        display: block;
+    }
+
+
+    .container{
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(rgba(0,0,0,0.3),transparent), url(../images/jw.jpg);
+        background-size: cover;
+        background-position: center;
+        padding: 0 8%;
+    }
+
+    nav{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 5px 0;
+    }
+
+    ul li{
+        list-style: none;
+    }
+
+    nav ul{
+        flex: 1;
+        text-align: right;
+        padding-right: 30px;
+    }
+
+    nav ul li{
+        display: inline-block;
+        list-style: none;
+        margin: 10px 30px;
+    }
+
+    nav ul li a{
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        font-size: 23px;
+    }
+
+    nav ul li a::after{
+        content: '';
+        width: 0;
+        height: 3px;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgb(255, 0, 0);
+        transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after{
+        width: 50%;
+    }
+
+    .text-box{
+        color: #fff;
+        position: absolute;
+        bottom: 8%;
+    }
+
+    .text-box p{
+        font-size: 50px;
+        font-weight: 600;
+    } 
+
+    nav h1 a{
+        text-decoration: none;
+        color: #d60000;
+        font-size: 45px;
+        transform: rotateZ(-362deg);
+        display: inline-block;
+        -webkit-filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+        filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+    }
+
+    nav h1 a:hover{
+        transform: rotateZ(362deg);
+    }
+
+    .text-box h2{
+        font-size: 120px;
+        line-height: 160px;
+        margin-left: -10px;
+        color: transparent;
+        -webkit-text-stroke: 1px #fff;
+        background: url(../images/back.png);
+        -webkit-background-clip: text;
+        background-position: 0 0;
+        animation: back 20s linear infinite;
+        text-shadow: 0 0 30px #ff0000,
+        0 0 45px #ff0000;
+    }
+
+    @keyframes back{
+        100%{
+            background-position: 2000px 0;
+        }
+    }
+
+    .text-box h3{
+        font-size: 20px;
+        font-weight: 100;
+    }
+
+    .text-box .row{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .text-box a{
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin-right: 20px;
+        border: 2px solid #fff;
+        display: flex;
+        align-items: center;
+    }
+    .text-box-color{
+        background-color: green;
+    }
+
+    .text-box a span{
+        font-size: 19px;
+        line-height: 15px;
+        margin-left: 5px;
+    }
+
+    .sinopse{
+        width: 900px;
+    }
+
+    .lupa{
+        width: 28px;
+    }
+
+    .sino{
+        width: 22px;
+    }
+
+
+
+
+    @media (min-width: 1000px) and (max-width: 1600px) {
+        .text-box h2{
+            font-size: 85px;
+        }
+    }
+
+
+    @media (max-width: 520px) {
+        nav ul{
+            padding-right: 10px;
+        }
+    
+        nav ul li{
+            margin: 10px 10px;
+        }
+    
+        nav ul li a{
+            font-size: 15px;
+        }
+    
+        nav h1 a{
+            font-size: 22px;
+        }
+    
+        .text-box h2{
+            font-size: 50px;
+        }
+    
+        .text-box h3{
+            font-size: 16px;
+        }
+
+        .text-box a span{
+            font-size: 14px;
+        }
+    
+        .sinopse{
+            width: 250px;
+        }
+    
+        .lupa{
+            width: 16px;
+        }
+    
+        .sino{
+            width: 13px;
+        }
+    }
+
+    @media (min-width: 520px) and (max-width: 1000px) {
+        nav ul{
+            padding-right: 10px;
+        }
+    
+        nav ul li{
+            margin: 10px 10px;
+        }
+    
+        nav ul li a{
+            font-size: 18px;
+        }
+    
+        nav h1 a{
+            font-size: 40px;
+        }
+    
+        .text-box h2{
+            font-size: 60px;
+        }
+    
+        .text-box h3{
+            font-size: 20px;
+        }
+    
+        .text-box a{
+            padding: 10px 20px;
+            border: 1px solid #fff;
+        }
+
+        .text-box a span{
+            font-size: 14px;
+        }
+    
+        .sinopse{
+            width: 500px;
+        }
+    
+        .lupa{
+            width: 23px;
+        }
+    
+        .sino{
+            width: 17px;
+        }
+    }

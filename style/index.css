@@ -1,0 +1,75 @@
+    body{
+        margin: 0;
+        border: 0;
+        padding: 0;
+        background-color: rgb(20, 20, 20);
+        font-family: 'Anton', sans-serif;
+    }
+    
+    .center{
+        text-align: center;
+    }
+
+    .margin10{
+        margin: 3px 40px;
+    }
+    
+    .login{
+        transition: all .5s;
+        border: 10px solid #333232;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .login:hover{
+        border: 10px solid #d60000;
+        border-radius: 50%;
+        -webkit-filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+        filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+        -webkit-transform: rotateZ(-360deg) scale(1.5);
+        transform: rotateZ(-360deg) scale(1.5);
+    }
+
+    .usuario{
+        width: 200px;
+    }
+
+    h1{
+        color: #d60000;
+        font-size: 80px;
+        transform: rotateZ(-361deg);
+        display: inline-block;
+        -webkit-filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+        filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+    }
+
+    .inter{
+        margin: 50px;
+        width: 70px;
+        cursor: pointer;
+    }
+
+    .inter:hover{
+        transform: scale(1.2);
+        cursor: pointer;
+        -webkit-filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+        filter: drop-shadow(15px 7px 1px rgba(0,0,0,.5));
+    }
+
+
+
+
+    @media (min-width: 1550px){
+        h1{
+            font-size: 100px;
+        }
+
+        .usuario{
+            width: 240px;
+        }
+
+        .inter{
+            margin: 56px;
+            width: 80px;
+        }
+    }
