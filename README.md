@@ -12,10 +12,10 @@ O projeto consiste em uma simulação de um catálogo de filmes, onde foi desenv
 ## Layout tela de login
 ![Login](https://github.com/MatheusAlvarez/MyFlixzin/blob/main/_assets/tela_de_login.jpg)
 
-## Layout inicial
+## Layout inicial Web
 ![Login](https://github.com/MatheusAlvarez/MyFlixzin/blob/main/_assets/tela_inicial.PNG)
 
-## Layout catálogo
+## Layout catálogo Web
 ![Login](https://github.com/MatheusAlvarez/MyFlixzin/blob/main/_assets/Catalogo.PNG)
 
 # Tecnologias utilizadas
